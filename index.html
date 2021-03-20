@@ -23,10 +23,10 @@
                 <img src = "LaunchCode_rocketline_white.png" height = "75" width = "75" id = "rocket"/>
             </div>
             <div style = "text-align: center; display: inline-block;">
-                    <button>Up</button>
-                    <button>Down</button>
-                    <button>Right</button>
-                    <button>Left</button>
+                    <button id = "up">Up</button>
+                    <button id = "down">Down</button>
+                    <button id = "right">Right</button>
+                    <button id = "left">Left</button>
                     <h3>Space Shuttle Height</h3>
                     <p id="spaceShuttleHeight">0</p><p style = "display: inline-block;"> miles</p>
             </div>
@@ -35,6 +35,46 @@
             <button id = "takeoff">Take off</button>
             <button id = "landing">Land</button>
             <button id = "missionAbort">Abort Mission</button>
+
+            <script>
+                function takeOffButtonClick() {
+                    let response = window.confirm("Confirm that the shuttle is ready for takeoff.");
+                    if (response === true) {
+                        document.getElementById("flightStatus").innerHTML = "Shuttle in flight.";
+                        document.getElementById("shuttleBackground").style.background = "blue";
+                        document.getElementById("spaceShuttleHeight").innerHTML = (Number(document.getElementById("spaceShuttleHeight").innerHTML) + 10000);
+                    }
+                }
+
+                function landingButtonClick() {
+                    let response = window.confirm("The shuttle is landing. Landing gear engaged.");
+                    if (response === true) {
+                        document.getElementById("flightStatus").innerHTML = "The shuttle has landed."
+                        document.getElementById("shuttleBackground").style.background = "green";
+                        document.getElementById("spaceShuttleHeight").innerHTML = 0;
+                    }
+                }
+
+                function abortMissionButtonClick() {
+                    let response = window.confirm("Confirm that you want to abort the mission.");
+                    if (response === true) {
+                        document.getElementById("flightStatus").innerHTML = "Mission aborted.";
+                        document.getElementById("shuttleBackground").style.background = "green";
+                        document.getElementById("spaceShuttleHeight").innerHTML = 0;
+                    }
+                }
+
+                window.addEventListener("load",function() {
+                    let takeOffButton = document.getElementById("takeoff");
+                    takeOffButton.addEventListener("click",takeOffButtonClick);
+
+                    let landingButton = document.getElementById("landing");
+                    landingButton.addEventListener("click",landingButtonClick);
+
+                    let abortMissionButton = document.getElementById("missionAbort");
+                    abortMissionButton.addEventListener("click",abortMissionButtonClick);
+                });
+            </script>
     </div>
     </body>
 </html>
